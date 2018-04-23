@@ -3,8 +3,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:200' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.14.0/js/jquery.terminal.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.14.0/css/jquery.terminal.min.css" rel="stylesheet"/>
+    <style>
+      
+    </style>
     </header>
-    <body data-gr-c-s-loaded="true" style="background-color: rgba(40, 48, 57, 0.94);">
+    <body data-gr-c-s-loaded="true" style="background-color: rgba(0, 0, 0, 0.94);">
         <div class="container">
 
         </div>
@@ -15,23 +22,60 @@
 		<div class="container text-white">
 				<code>CLI Profile</code>
 
-             <form>
-    <div class="form-group row">
-      <div class="col-xs-2">
-        <label for="ex1"><code class="line text-white"><span>$ </span>pip search about-asutosh-patel</code></label>
-        <input class="form-control" id="ex1" type="text">
-      </div>
-    </div>
-  </form>
-		</div>
-        <div class="container text-white" style="background-color:#1d252c">
-			{% for skill in data %}
-            	<p>>
-                    {{skill.fields.Name}}
+        <div id="term_demo" style="height: 200px; --char-width:7;" class="terminal">
 
-            </p>
-            {% endfor %}
         </div>
+    </div>
+    <!-- <script>
+    (function($){
+      $(function($, undefined) {
+        $('#term_demo').terminal(function(command) {
+            if (command !== '') {
+                try {
+                    var result = window.eval(command);
+                    if (result !== undefined) {
+                        this.echo(new String(result));
+                    }
+                } catch(e) {
+                    this.error(new String(e));
+                }
+            } else {
+               this.echo('');
+            }
+        }, {
+            greetings: 'JavaScript Interpreter',
+            name: 'js_demo',
+            height: 200,
+            prompt: 'js> '
+        });
+    });
+})(jQuery);
+</script> -->
+,<script>
+  $(document).ready(function($){
+    $(function($, undefined) {
+    $('#term_demo').terminal(function(command) {
+            if (command !== '') {
+                try {
+                    var result = window.eval(command);
+                    if (result !== undefined) {
+                        this.echo(new String(result));
+                    }
+                } catch(e) {
+                    this.error(new String(e));
+                }
+            } else {
+               this.echo('');
+            }
+        }, {
+            greetings: 'JavaScript Interpreter',
+            name: 'js_demo',
+            height: 200,
+            prompt: '--> '
+        });
+    });
+  })(jQuery);
+</script>        
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

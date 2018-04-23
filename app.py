@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     search_result=AT.get_all()
-    return render_template('index.html',data=search_result)
+    return render_template('index.html',)
 
 if __name__ == '__main__':
    app.run()
