@@ -1,174 +1,68 @@
-<header id="demo">
-    <h2>Demo</h2>
-</header>
-<p>This is a simple demo, using a JavaScript interpreter. (If the cursor is not blinking, click on the terminal to activate
-    it.) You can type any JavaScript expression, there are two debug function dir (like in Python).</p>
-<p>You can use jQuery's "$" method to manipulate the page. You also have access to this terminal in the "term" variable. Try
-    "dir(term)" or "term.signature()".</p>
-<div id="term_demo" style="height: 200px; --char-width:7;" class="terminal">
-    <div class="terminal-wrapper">
-        <div class="terminal-output" role="log">
-            <div data-index="0">
-                <div style="width: 100%;">
-                    <span>JavaScript&nbsp;Interpreter&nbsp;(term&nbsp;v.&nbsp;1.14.0)</span>
-                </div>
-            </div>
-        </div>
-        <div class="cmd" style="width: 100%;">
-            <span class="prompt">
-                <span>js&gt;&nbsp;</span>
-            </span>
-            <div class="cursor-line" role="presentation" aria-hidden="true">
-                <span></span>
-                <span class="cursor">&nbsp;</span>
-                <span></span>
-            </div>
-            <textarea autocapitalize="off" spellcheck="false" tabindex="1" class="clipboard"></textarea>
-        </div>
-    </div>
-    <div class="font">
-        <iframe class="resizer"></iframe>
-    </div>
-    <div class="terminal-fill"></div>
-    <iframe class="resizer"></iframe>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script src="jquery.terminal.js"></script>
+<link rel="stylesheet" type="text/css" href="jquery.terminal.js" />
+<script>
+$(function() {
+	$('#terminal').terminal({
+		welcome: 'jquery.terminal example - Simple usage\n\
+Type \txhelp\t-help\tx to see a list of available commands.'
+	});
+	
+	$('#snippets a').click(function() {
+		$('#terminal').terminal('execute', $(this).text());
+		return false;
+	})
+});
+</script>
+
+<style type="text/css">
+#terminal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50%;
+}
+
+#snippets {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50%;
+}
+
+#snippets > * {
+	display: block;
+	padding: 5px;
+}
+
+#snippets > a {
+	font-family: monospace;
+}
+
+#snippets > a:hover {
+	background-color: lightgray;
+}
+</style>
+</head>
+<body>
+<div id="terminal"></div>
+<div id="snippets">
+<span>Try these codes:</span>
+<a href="#">clear</a>
+<a href="#">echo hello world</a>
+<a href="#">echo hello world ~ count</a>
+<a href="#">list hello world ~ count</a>
+<a href="#">list hello world | echo ~ count</a>
+<a href="#">seq 10 20 | slice 2 6 | join ', '</a>
+<a href="#">prompt 'Please give a number:' | seq | foreach i : ( (echo $i is ; test $i % 2 == 1 && echo odd || echo even) | echo )</a>
+<a href="#">set var "hello world!" "how are you?" ; list 'get var' 'echo \$var' 'list \$var' | foreach command : (echo == $command == ; split ' ' $command | exec) ; unset var</a>
+<a href="#">help | slice 2 0 | replace '^([^ ]+).*?$' '$1' | foreach command : (echo === $command === ; help $command ; echo)</a>
 </div>
-<p>JavaScript code:</p>
-<div class="wrapper">
-    <a href="#" class="syntax_toogle">toggle highlight</a>
-    <pre class="text" style="display: none;">jQuery(function($, undefined) {
-    </pre>
-    <div class="sh_ snippet-wrap">
-        <ul class="snippet-no-num">
-            <li>
-                <span class="sh_function">jQuery</span>
-                <span class="sh_symbol">(</span>
-                <span class="sh_keyword">function</span>
-                <span class="sh_symbol">(</span>$
-                <span class="sh_symbol">,</span>
-                <span class="sh_predef_var">undefined</span>
-                <span class="sh_symbol">)</span>
-                <span class="sh_cbracket">{</span>
-            </li>
-            <li> $
-                <span class="sh_symbol">(</span>
-                <span class="sh_string">'#term_demo'</span>
-                <span class="sh_symbol">).</span>
-                <span class="sh_function">terminal</span>
-                <span class="sh_symbol">(</span>
-                <span class="sh_keyword">function</span>
-                <span class="sh_symbol">(</span>command
-                <span class="sh_symbol">)</span>
-                <span class="sh_cbracket">{</span>
-            </li>
-            <li>
-                <span class="sh_keyword">if</span>
-                <span class="sh_symbol">(</span>command
-                <span class="sh_symbol">!==</span>
-                <span class="sh_string">''</span>
-                <span class="sh_symbol">)</span>
-                <span class="sh_cbracket">{</span>
-            </li>
-            <li>
-                <span class="sh_keyword">try</span>
-                <span class="sh_cbracket">{</span>
-            </li>
-            <li>
-                <span class="sh_keyword">var</span> result
-                <span class="sh_symbol">=</span> window
-                <span class="sh_symbol">.</span>
-                <span class="sh_predef_func">eval</span>
-                <span class="sh_symbol">(</span>command
-                <span class="sh_symbol">);</span>
-            </li>
-            <li>
-                <span class="sh_keyword">if</span>
-                <span class="sh_symbol">(</span>result
-                <span class="sh_symbol">!==</span>
-                <span class="sh_predef_var">undefined</span>
-                <span class="sh_symbol">)</span>
-                <span class="sh_cbracket">{</span>
-            </li>
-            <li>
-                <span class="sh_keyword">this</span>
-                <span class="sh_symbol">.</span>
-                <span class="sh_function">echo</span>
-                <span class="sh_symbol">(</span>
-                <span class="sh_keyword">new</span>
-                <span class="sh_predef_func">String</span>
-                <span class="sh_symbol">(</span>result
-                <span class="sh_symbol">));</span>
-            </li>
-            <li>
-                <span class="sh_cbracket">}</span>
-            </li>
-            <li>
-                <span class="sh_cbracket">}</span>
-                <span class="sh_keyword">catch</span>
-                <span class="sh_symbol">(</span>e
-                <span class="sh_symbol">)</span>
-                <span class="sh_cbracket">{</span>
-            </li>
-            <li>
-                <span class="sh_keyword">this</span>
-                <span class="sh_symbol">.</span>
-                <span class="sh_function">error</span>
-                <span class="sh_symbol">(</span>
-                <span class="sh_keyword">new</span>
-                <span class="sh_predef_func">String</span>
-                <span class="sh_symbol">(</span>e
-                <span class="sh_symbol">));</span>
-            </li>
-            <li>
-                <span class="sh_cbracket">}</span>
-            </li>
-            <li>
-                <span class="sh_cbracket">}</span>
-                <span class="sh_keyword">else</span>
-                <span class="sh_cbracket">{</span>
-            </li>
-            <li>
-                <span class="sh_keyword">this</span>
-                <span class="sh_symbol">.</span>
-                <span class="sh_function">echo</span>
-                <span class="sh_symbol">(</span>
-                <span class="sh_string">''</span>
-                <span class="sh_symbol">);</span>
-            </li>
-            <li>
-                <span class="sh_cbracket">}</span>
-            </li>
-            <li>
-                <span class="sh_cbracket">}</span>
-                <span class="sh_symbol">,</span>
-                <span class="sh_cbracket">{</span>
-            </li>
-            <li> greetings
-                <span class="sh_symbol">:</span>
-                <span class="sh_string">'JavaScript Interpreter'</span>
-                <span class="sh_symbol">,</span>
-            </li>
-            <li> name
-                <span class="sh_symbol">:</span>
-                <span class="sh_string">'js_demo'</span>
-                <span class="sh_symbol">,</span>
-            </li>
-            <li> height
-                <span class="sh_symbol">:</span>
-                <span class="sh_number">200</span>
-                <span class="sh_symbol">,</span>
-            </li>
-            <li> prompt
-                <span class="sh_symbol">:</span>
-                <span class="sh_string">'js&gt; '</span>
-            </li>
-            <li>
-                <span class="sh_cbracket">}</span>
-                <span class="sh_symbol">);</span>
-            </li>
-            <li>
-                <span class="sh_cbracket">}</span>
-                <span class="sh_symbol">);</span>
-            </li>
-        </ul>
-    </div>
-</div>
+</body>
+</html>
