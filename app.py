@@ -2,9 +2,9 @@ import os
 from flask import Flask, request, render_template,jsonify
 from airtable import Airtable
 
-AT= Airtable('Table API Key',
-            'Table Name',
-            'Airtable Api key')
+AT= Airtable('Airtable Base Key',
+            'Skills',
+            'Airtable API Key')
 app = Flask(__name__)
 
 @app.route('/')

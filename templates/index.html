@@ -26,69 +26,48 @@
 
         </div>
     </div>
-    <!-- <script>
-    (function($){
-      $(function($, undefined) {
+ </body> </html>
+<script>
+    var result="";
+    function loadResult(querystring) {
+         // result="";
+                $.ajax({
+                    url: 'search',
+                    async:false,
+                    data: {'query': querystring},
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        data.forEach(function(data,index){
+                                result+=data.fields.Name+" "
+                            
+                            })
+                    },
+                });               
+             return  result;
+            } 
+
+           
+      $(document).ready(function($){
+        $(function($, undefined) {
         $('#term_demo').terminal(function(command) {
-            if (command !== '') {
-                try {
-                    var result = window.eval(command);
-                    if (result !== undefined) {
-                        this.echo(new String(result));
-                    }
-                } catch(e) {
-                    this.error(new String(e));
-                }
-            } else {
-               this.echo('');
-            }
-        }, {
-            greetings: 'JavaScript Interpreter',
-            name: 'js_demo',
-            height: 200,
-            prompt: 'js> '
-        });
-    });
-})(jQuery);
-</script> -->
-,<script>
-    var result;
-  $(document).ready(function($){
-    $(function($, undefined) {
-    $('#term_demo').terminal(function(command) {
-        if (command != ' ') {   
-            this.echo(loadResult(command));
-    } else {
-            this.echo('unknown command');
-    }
-        }, {
-            greetings: 'JavaScript Interpreter',
-            name: 'js_demo',
-            height: 200,
-            prompt: '--> '
-        });
-    });
-  })
-  function loadResult(querystring) {
-            $.ajax({
-                url: 'search',
-                data: {'query': querystring},
-                dataType: 'json',
-                type: 'GET',
-                success: function (data) {
-                    data.forEach(function(data,index){
-                            result+=data.fields.Name+','
-                        })
-                    
-                },
-            });
-            console.log(result)
-            return  result;
+            if (command != ' ') {  
+                this.echo(loadResult(command));               
+                result="";
+        } else {
+                this.echo('unknown command');
         }
-        (jQuery);
-</script>        
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body> </html>
+            }, {
+                greetings: 'JavaScript Interpreter ',
+                name: 'js_demo',
+                height: 200,
+                prompt: '>> '
+            });
+        });
+      })
+    </script>        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
 
